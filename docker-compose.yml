@@ -1,0 +1,18 @@
+services:
+  novatrek:
+    build: .
+    ports:
+      - "${PORT:-8000}:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8000"
+      DB_PATH: /data/novatrek.db
+    volumes:
+      - novatrek-data:/data
+    restart: unless-stopped
+
+volumes:
+  novatrek-data:
